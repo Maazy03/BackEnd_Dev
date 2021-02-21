@@ -106,7 +106,24 @@ exports.updateBootcamp=async(req,res,next)=>{
 //@desc update bootcamps
 //route /put/api/v1/bootcamps/:id
 
-exports.deleteBootcamp=(req,res,next)=>{
-    res.status(200).json({ sucess: true,message:`Deleted at ${req.params.id}` })
+exports.deleteBootcamp=async(req,res,next)=>{
+    try {
+        const deleteBootCamps=await BootCamp.findByIdAndDelete(req.params.id)
+        if(!deleteBootCamps)
+        {
+            return res.status(400).json({sucess:false,error:'Invalid Id'})
+        }
+         res.status(200).json({
+             sucess:true,
+             data:{}
+         })
+
+    } catch (err) {
+        console.log("DELETE ERROR",err.message)
+        res.status(404).json({
+            sucess:false,
+            error:err.message
+        })
+    }
 
 }
