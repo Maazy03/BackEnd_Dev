@@ -99,7 +99,6 @@ exports.updateBootcamp=async(req,res,next)=>{
             error:err.message
         })
     }
-    // res.status(200).json({ sucess: true,message:`Updated at ${req.params.id}` })
 
 }
 
